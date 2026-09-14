@@ -1,0 +1,43 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    function isGuest(userId) {
+      return userId.matches('^guest_[a-zA-Z0-9_\\-]+$');
+    }
+
+    // User profiles & live door state
+    match /users/{userId} {
+      allow read: if true;
+      allow write: if (isAuthenticated() && request.auth.uid == userId) || isGuest(userId);
+
+      // Live incoming knocking, whispers, PTT voice, and beams
+      match /events/{eventId} {
+        allow read, create, update, delete: if true;
+      }
+
+      // Door notes slipped under the door
+      match /notes/{noteId} {
+        allow read, create, update, delete: if true;
+      }
+
+      // Interaction logbook & history
+      match /history/{historyId} {
+        allow read, write: if true;
+      }
+
+      // Keyholders
+      match /keyholders/{friendId} {
+        allow read, write: if true;
+      }
+    }
+
+    // Door codes mapping for quick sharing
+    match /doorCodes/{code} {
+      allow read, write: if true;
+    }
+  }
+}
+

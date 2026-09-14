@@ -1,0 +1,57 @@
+{
+  "entities": {
+    "User": {
+      "fields": {
+        "uid": "string",
+        "displayName": "string",
+        "handle": "string",
+        "avatar": "string",
+        "doorCode": "string",
+        "doorState": "string",
+        "isOnline": "boolean",
+        "isTransmitting": "boolean",
+        "accentColor": "string",
+        "lastSeen": "timestamp"
+      }
+    },
+    "DoorEvent": {
+      "fields": {
+        "type": "string",
+        "fromUserId": "string",
+        "fromName": "string",
+        "fromAvatar": "string",
+        "payload": "string",
+        "audioData": "string",
+        "audioDuration": "number",
+        "imageUrl": "string",
+        "timestamp": "timestamp",
+        "handled": "boolean"
+      }
+    },
+    "DoorNote": {
+      "fields": {
+        "fromUserId": "string",
+        "fromName": "string",
+        "avatar": "string",
+        "note": "string",
+        "type": "string",
+        "timestamp": "timestamp"
+      }
+    },
+    "DoorHistory": {
+      "fields": {
+        "friendId": "string",
+        "friendName": "string",
+        "friendAvatar": "string",
+        "type": "string",
+        "summary": "string",
+        "details": "string",
+        "audioDuration": "number",
+        "voiceTranscript": "string",
+        "imageUrl": "string",
+        "wasMissed": "boolean",
+        "timestamp": "timestamp"
+      }
+    }
+  }
+}
